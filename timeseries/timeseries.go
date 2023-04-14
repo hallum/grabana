@@ -442,3 +442,11 @@ func FieldOverride(m fields.Matcher, opts ...fields.OverrideOption) Option {
 		return nil
 	}
 }
+
+// DisplayName allows overriding the series name display in legend and tooltip.
+func DisplayName(name string) Option {
+	return func(timeseries *TimeSeries) error {
+		timeseries.Builder.TimeseriesPanel.FieldConfig.Defaults.DisplayName = name
+		return nil
+	}
+}

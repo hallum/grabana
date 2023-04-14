@@ -31,3 +31,5 @@ require (
 	google.golang.org/appengine v1.6.7 // indirect
 	google.golang.org/protobuf v1.28.1 // indirect
 )
+
+replace github.com/K-Phoen/sdk => github.com/hallum/sdk adf7217d189c76fd1062e172a169f73cd35233ed
