@@ -121,6 +121,13 @@ func IncludeAll() Option {
 	}
 }
 
+// DefaultAll selects "All" value by default
+func DefaultAll() Option {
+	return func(custom *Custom) {
+		custom.Builder.Current = sdk.Current{Text: &sdk.StringSliceString{Value: []string{"All"}, Valid: true}, Value: "$__all"}
+	}
+}
+
 // AllValue define the value used when selecting the "All" option.
 func AllValue(value string) Option {
 	return func(custom *Custom) {
