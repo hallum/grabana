@@ -189,6 +189,15 @@ func Tooltip(mode TooltipMode) Option {
 	}
 }
 
+// SpanNulls if true connect nulls points on a line graph
+func SpanNulls(isSpanNulls bool) Option {
+	return func(timeseries *TimeSeries) error {
+		timeseries.Builder.TimeseriesPanel.FieldConfig.Defaults.Custom.SpanNulls = isSpanNulls
+
+		return nil
+	}
+}
+
 // LineWidth defines the width of the line for a series (default 1, max 10, 0 is none).
 func LineWidth(value int) Option {
 	return func(timeseries *TimeSeries) error {
