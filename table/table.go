@@ -150,10 +150,10 @@ func TimeColumn(columnLabelPattern string, alias string, timeFormat string) Opti
 	return func(table *Table) error {
 		table.Builder.TablePanel.Styles = append([]sdk.ColumnStyle{
 			{
-				Alias:   alias,
-				Type:    "date",
-				Pattern: columnLabelPattern,
-				Date:    timeFormat,
+				Alias:      &alias,
+				Type:       "date",
+				Pattern:    columnLabelPattern,
+				DateFormat: &timeFormat,
 			},
 		}, table.Builder.TablePanel.Styles...)
 
