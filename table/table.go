@@ -161,6 +161,21 @@ func TimeColumn(columnLabelPattern string, alias string, timeFormat string) Opti
 	}
 }
 
+// StringColumn formats a string column
+func StringColumn(columnLabelPattern string, alias string, timeFormat string) Option {
+	return func(table *Table) error {
+		table.Builder.TablePanel.Styles = append([]sdk.ColumnStyle{
+			{
+				Alias:   &alias,
+				Type:    "string",
+				Pattern: columnLabelPattern,
+			},
+		}, table.Builder.TablePanel.Styles...)
+
+		return nil
+	}
+}
+
 // TimeSeriesToRows displays the data in rows.
 func TimeSeriesToRows() Option {
 	return func(table *Table) error {
