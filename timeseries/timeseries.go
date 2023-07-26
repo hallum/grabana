@@ -345,18 +345,19 @@ func ColorScheme(options ...scheme.Option) Option {
 func Legend(opts ...LegendOption) Option {
 	return func(timeseries *TimeSeries) error {
 		yup := true
+		nope := false
 		legend := sdk.TimeseriesLegendOptions{
 			Show:        &yup,
 			DisplayMode: "list",
 			Placement:   "bottom",
 			Calcs:       make([]string, 0),
 			SortBy:      "",
+			SortDesc:    &yup,
 		}
 
 		for _, opt := range opts {
 			switch opt {
 			case Hide:
-				nope := false
 				legend.DisplayMode = "hidden"
 				legend.Show = &nope
 			case AsList:
@@ -399,10 +400,8 @@ func Legend(opts ...LegendOption) Option {
 				legend.SortBy = "Max"
 
 			case SortAsc:
-				nope := false
 				legend.SortDesc = &nope
 			case SortDesc:
-				yup := true
 				legend.SortDesc = &yup
 
 			default:
