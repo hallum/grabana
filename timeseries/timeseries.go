@@ -402,6 +402,7 @@ func Legend(opts ...LegendOption) Option {
 				nope := false
 				legend.SortDesc = &nope
 			case SortDesc:
+				nope := true
 				legend.SortDesc = &yup
 
 			default:
