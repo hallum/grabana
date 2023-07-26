@@ -29,6 +29,18 @@ const (
 	NoSeries TooltipMode = "none"
 )
 
+// TooltipSortMode configures which series will be displayed in the tooltip.
+type TooltipSortMode string
+
+const (
+	// TTSortNone will not sort the tooltip results
+	TTSortNone TooltipSortMode = "none"
+	// TTSortAsc will sort values in ascending order
+	TTSortAsc TooltipSortMode = "asc"
+	// TTSortDesc will sort values in descending order
+	TTSortDesc TooltipSortMode = "desc"
+)
+
 // StackMode configures mode of series stacking.
 type StackMode string
 
@@ -119,6 +131,18 @@ const (
 	Count
 	// Range displays the difference between the minimum and maximum values.
 	Range
+
+	// SortMin sorts the legend by the min field
+	SortMin
+	// SortMean sorts the legend by the mean field
+	SortMean
+	// SortMax sorts the legend by the max field
+	SortMax
+
+	// SortAsc sorts the legend field in ascending order
+	SortAsc
+	// SortDesc sorts the legend field in descending order
+	SortDesc
 )
 
 // TimeSeries represents a time series panel.
@@ -147,7 +171,7 @@ func defaults() []Option {
 		LineWidth(1),
 		FillOpacity(25),
 		PointSize(5),
-		Tooltip(SingleSeries),
+		Tooltip(SingleSeries, TTSortNone),
 		Legend(Bottom, AsList),
 		Lines(Linear),
 		GradientMode(Opacity),
@@ -181,9 +205,10 @@ func DataSource(source string) Option {
 }
 
 // Tooltip configures the tooltip content.
-func Tooltip(mode TooltipMode) Option {
+func Tooltip(mode TooltipMode, sm TooltipSortMode) Option {
 	return func(timeseries *TimeSeries) error {
 		timeseries.Builder.TimeseriesPanel.Options.Tooltip.Mode = string(mode)
+		timeseries.Builder.TimeseriesPanel.Options.Tooltip.Sort = string(sm)
 
 		return nil
 	}
@@ -325,6 +350,7 @@ func Legend(opts ...LegendOption) Option {
 			DisplayMode: "list",
 			Placement:   "bottom",
 			Calcs:       make([]string, 0),
+			SortBy:      "",
 		}
 
 		for _, opt := range opts {
@@ -364,6 +390,20 @@ func Legend(opts ...LegendOption) Option {
 				legend.Calcs = append(legend.Calcs, "sum")
 			case Range:
 				legend.Calcs = append(legend.Calcs, "range")
+
+			case SortMin:
+				legend.SortBy = "Min"
+			case SortMean:
+				legend.SortBy = "Mean"
+			case SortMax:
+				legend.SortBy = "Max"
+
+			case SortAsc:
+				nope := false
+				legend.SortDesc = &nope
+			case SortDesc:
+				legend.SortDesc = &yup
+
 			default:
 				return fmt.Errorf("unknown legend option: %w", errors.ErrInvalidArgument)
 			}

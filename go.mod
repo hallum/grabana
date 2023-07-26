@@ -32,4 +32,4 @@ require (
 	google.golang.org/protobuf v1.28.1 // indirect
 )
 
-replace github.com/K-Phoen/sdk => github.com/hallum/sdk adf7217d189c76fd1062e172a169f73cd35233ed
+replace github.com/K-Phoen/sdk => github.com/hallum/sdk v0.0.0-20230726140610-691d955e4972
