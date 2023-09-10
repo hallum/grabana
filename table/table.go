@@ -176,6 +176,22 @@ func StringColumn(columnLabelPattern string, alias string) Option {
 	}
 }
 
+// NumberColumn formats a number column
+func NumberColumn(columnLabelPattern string, alias string, unit string) Option {
+	return func(table *Table) error {
+		table.Builder.TablePanel.Styles = append([]sdk.ColumnStyle{
+			{
+				Alias:   &alias,
+				Type:    "number",
+				Pattern: columnLabelPattern,
+				Unit:    &unit,
+			},
+		}, table.Builder.TablePanel.Styles...)
+
+		return nil
+	}
+}
+
 // TimeSeriesToRows displays the data in rows.
 func TimeSeriesToRows() Option {
 	return func(table *Table) error {
