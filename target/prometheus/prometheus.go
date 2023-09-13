@@ -84,3 +84,10 @@ func IntervalFactor(factor int) Option {
 		prometheus.IntervalFactor = factor
 	}
 }
+
+// Interval sets the minimum interval / rate interval used in queries
+func Interval(interval string) Option {
+	return func(prometheus *Prometheus) {
+		prometheus.Interval = interval
+	}
+}
