@@ -16,10 +16,11 @@ const (
 type DisplayStyle string
 
 const (
-	Off             DisplayStyle = "off"
-	AsFilledRegions DisplayStyle = "area"
-	AsLines         DisplayStyle = "line"
-	Both            DisplayStyle = "line+area"
+	Off                 DisplayStyle = "off"
+	AsFilledRegions     DisplayStyle = "area"
+	AsLines             DisplayStyle = "line"
+	Both                DisplayStyle = "line+area"
+	DashedLineAndFilled DisplayStyle = "dashed+area"
 )
 
 // Option represents an option that can be used to configure an axis.
