@@ -1,6 +1,8 @@
 package dashlist
 
 import (
+	"fmt"
+	"github.com/K-Phoen/grabana/errors"
 	"github.com/K-Phoen/sdk"
 )
 
@@ -31,6 +33,47 @@ func New(title string, options ...Option) (*DashList, error) {
 func NoTitle() Option {
 	return func(dashlist *DashList) error {
 		dashlist.Builder.Title = ""
+		return nil
+	}
+}
+
+// Span sets the width of the panel, in grid units. Should be a positive
+// number between 1 and 12. Example: 6.
+func Span(span float32) Option {
+	return func(dashlist *DashList) error {
+		if span < 1 || span > 12 {
+			return fmt.Errorf("span must be between 1 and 12: %w", errors.ErrInvalidArgument)
+		}
+
+		dashlist.Builder.Span = span
+
+		return nil
+	}
+}
+
+// Height sets the height of the panel, in pixels. Example: "400px".
+func Height(height string) Option {
+	return func(dashlist *DashList) error {
+		dashlist.Builder.Height = &height
+
+		return nil
+	}
+}
+
+// Description annotates the current visualization with a human-readable description.
+func Description(content string) Option {
+	return func(dashlist *DashList) error {
+		dashlist.Builder.Description = &content
+
+		return nil
+	}
+}
+
+// Transparent makes the background transparent.
+func Transparent() Option {
+	return func(dashlist *DashList) error {
+		dashlist.Builder.Transparent = true
+
 		return nil
 	}
 }
