@@ -113,3 +113,14 @@ func NoTitle() Option {
 		return nil
 	}
 }
+
+// GridPos sets the pos of the panel
+func GridPos(h, w, x, y int) Option {
+	return func(text *Text) error {
+		text.Builder.GridPos.H = &h
+		text.Builder.GridPos.W = &w
+		text.Builder.GridPos.X = &x
+		text.Builder.GridPos.Y = &y
+		return nil
+	}
+}

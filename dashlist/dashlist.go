@@ -141,3 +141,14 @@ func Tags(tags []string) Option {
 		return nil
 	}
 }
+
+// GridPos sets the pos of the panel
+func GridPos(h, w, x, y int) Option {
+	return func(dashlist *DashList) error {
+		dashlist.Builder.GridPos.H = &h
+		dashlist.Builder.GridPos.W = &w
+		dashlist.Builder.GridPos.X = &x
+		dashlist.Builder.GridPos.Y = &y
+		return nil
+	}
+}
