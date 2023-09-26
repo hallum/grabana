@@ -105,3 +105,11 @@ func Transparent() Option {
 		return nil
 	}
 }
+
+// NoTitle removes the default text and sets to an empty string
+func NoTitle() Option {
+	return func(text *Text) error {
+		text.Builder.Title = ""
+		return nil
+	}
+}
