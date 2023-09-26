@@ -230,3 +230,17 @@ func Collapse() Option {
 		return nil
 	}
 }
+
+// WithDashlist adds a "dashlist" panel in the row
+func WithDashlist(title string, options ...dashlist.Option) Option {
+	return func(row *Row) error {
+		panel, err := dashlist.New(title, options...)
+		if err != nil {
+			return err
+		}
+
+		row.builder.Add(panel.Builder)
+
+		return nil
+	}
+}
