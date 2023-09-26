@@ -2,6 +2,7 @@ package row
 
 import (
 	"github.com/K-Phoen/grabana/alert"
+	"github.com/K-Phoen/grabana/dashlist"
 	"github.com/K-Phoen/grabana/gauge"
 	"github.com/K-Phoen/grabana/graph"
 	"github.com/K-Phoen/grabana/heatmap"
