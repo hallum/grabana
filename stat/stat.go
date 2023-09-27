@@ -32,6 +32,14 @@ const (
 	TextNone         TextMode = "none"
 )
 
+// JustifyMode controls the horizontal justification of the values
+type JustifyMode string
+
+const (
+	JustifyAuto   JustifyMode = "auto"
+	JustifyCenter JustifyMode = "center"
+)
+
 // OrientationMode controls the layout.
 type OrientationMode string
 
@@ -447,6 +455,15 @@ func ColorScheme(options ...scheme.Option) Option {
 func NoValue(text string) Option {
 	return func(stat *Stat) error {
 		stat.Builder.StatPanel.FieldConfig.Defaults.NoValue = text
+
+		return nil
+	}
+}
+
+// Justify sets the justify mode (auto or center)
+func Justify(pos JustifyMode) Option {
+	return func(stat *Stat) error {
+		stat.Builder.StatPanel.Options.JustifyMode = string(pos)
 
 		return nil
 	}
